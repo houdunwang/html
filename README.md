@@ -14,11 +14,12 @@ HTML 有很多特点，但是我们也不能盲目使用 HTML，而是应该在�
 ####创建对象实例
 
 ```
+$obj = new \houdunwang\html\Html();
 ```
 
 ####生成静态文件
 ``` 
-Html::make('Home\Controller\IndexController','home','index.html');
+$obj->make('home\News@home',['id'=>1],'index.html');
 ```
 
-执行 Home\Controller\IndexController 控制器中的 home 方法，执行结果生成静态文件index.html
+执行 home\News 类中的 home 方法，并传递$_GET参数id为1, 执行结果生成静态文件index.html。
