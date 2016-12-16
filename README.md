@@ -1,162 +1,24 @@
-#数组增强
+# 生成静态
 
-数组增强组件主要是对数组等数据进行处理，如无限级分类操作、商品规格的迪卡尔乘积运算等。
+##介绍 
+生成静态 html 好处很明显，第一点是非常有利于 SEO 的优化，搜索引擎可以对 html文件进行更好的收录。第二点是显著减轻网站的负载，WEB 服务器在处理 html 文件时只是简单的读取操作，不会经由 PHP 模块进行处理，也不会有数据库服务器的操作，所以速度要较 PHP 文件快得多。 
 
-###创建对象实例
+HTML 有很多特点，但是我们也不能盲目使用 HTML，而是应该在更新频率较低的页面采用 HTML 处理方式 ，比如说文章系统、博客系统，社区门户等方面，而在更新频率较高的应用如论坛、微薄、SNS 等方面建议采用 
 
-```
-$obj = new \houdunwang\arr\Arr();
-```
+后盾 HDPHP 框架提供高效简单的生成 HTML 文件的操作。 
 
-###根据键名获取数据
+[TOC]
 
-如果键名不存在时返回默认值，支持键名的点语法
-```
-$d=['a'=>1,'b'=>2];
-$obj->get($d,'c','没有数据哟');
-```
-使用点语法查找：
-```
-$d = ['web' => [ 'id' => 1, 'url' => 'houdunwang.com' ]];
-p($obj->get($d,'web.url'));
-```
-###设置数组元素值支持点语法
+##操作
+
+####创建对象实例
 
 ```
-$data=[];
-p($obj->set($data,'a.b.c',99));
 ```
 
-###改变数组键名大小写
-
-```
-$obj->keyCase(array('name'=>'houdunwang',array('url'=>'hdphp.com')),1); 
-
-第2个参数为类型： 1 大写  0 小写
+####生成静态文件
+``` 
+Html::make('Home\Controller\IndexController','home','index.html');
 ```
 
-###不区分大小写检测键名是否存
-
-```
-$obj->keyExists('Hd',['hd'=>'后盾网']);
-```
-
-###数组值大小写转换
-
-```
-$obj->valueCase(['name'=>'houdunwang'],1); 
-
-第2个参数为类型： 1 大写  0 小写
-```
-
-###数组进行整数映射转换
-
-```
-$data = ['status'=>1];
-$d = $obj->intToString($data,['status'=>[0=>'关闭',1=>'开启']]); 
-```
-
-###数组中的字符串数字转为数值类型
-
-```
-$data = ['status'=>'1','click'=>'200'];
-$d = $obj->stringToInt($data); 
-```
-
-###根据下标过滤数据元素
-
-```
-$d = [ 'id' => 1, 'url' => 'houdunwang.com','title'=>'后盾网' ];
-print_r($obj->filterKeys($d,['id','url']));
-//过滤 下标为 id 的元素
-```
-
-当第三个参数为 0 时只保留指定的元素
-```
-$d = [ 'id' => 1, 'url' => 'houdunwang.com','title'=>'后盾网' ];
-p($obj->filterKeys($d,['id'],0));
-//只显示id与title 的元素
-```
-
-###获得树状结构
-
-```
-$obj->tree($data, $title, $fieldPri = 'cid', $fieldPid = 'pid');
-参数                   	说明
-$data                 	数组
-$title                	字段名称
-$fieldPri             	主键 id
-$fieldPid             	父 id
-```
-
-###获得目录列表
-
-```
-$obj->channelList($data, $pid = 0, $html = "&nbsp;", $fieldPri = 'cid', $fieldPid = 'pid', $level = 1);
-
-参数                      	说明 
-data                 	操作的数组
-pid                  	父级栏目的 id 值
-html                	栏目名称前缀，用于在视图中显示层次感的栏目列表 
-fieldPri              	唯一键名，如果是表则是表的主键
-fieldPid              	父 ID 键名
-level                 	等级（不需要传参数，系统运行时使用 ) 
-```
-
-###获得多级目录列表（多维数组）
-
-```
-$obj->channelLevel($data, $pid = 0, $html = "&nbsp;", $fieldPri = 'cid', $fieldPid = 'pid') 
-
-参数                          	说明
-data                      	操作的数组
-pid                      	父级栏目的 id 值
-html                     	栏目名称前缀，用于在视图中显示层次感的栏目列表
-fieldPri                 	唯一键名，如果是表则是表的主键
-fieldPid                  	父 ID 键名
-```
-
-###获得所有父级栏目
-
-```
-$obj->parentChannel($data, $sid, $fieldPri = 'cid', $fieldPid = 'pid');
-
-参数                          	说明
-data                      	操作的数组
-sid                      	子栏目
-fieldPri                 	唯一键名，如果是表则是表的主键
-fieldPid                  	父 ID 键名
-
-```
-
-###是否为子栏目
-
-```
-$obj->isChild($data, $sid, $pid, $fieldPri = 'cid', $fieldPid = 'pid')
-
-参数                          	说明
-data                      	操作的数组
-sid                      	子栏目id
-pid                      	父栏目id
-fieldPri                 	唯一键名，如果是表则是表的主键
-fieldPid                  	父 ID 键名
-```
-
-###是否有子栏目
-
-```
-$obj->hasChild($data, $cid, $fieldPid = 'pid')
-
-参数                          	说明
-data                      	操作的数组
-cid                      	栏目cid
-fieldPid                  	父 ID 键名
-
-```
-
-###迪卡尔乘积
-
-```
-$obj->descarte($arr, $tmp = array())
-```
-
+执行 Home\Controller\IndexController 控制器中的 home 方法，执行结果生成静态文件index.html

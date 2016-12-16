@@ -7,35 +7,31 @@
  * |    WeChat: aihoudun
  * | Copyright (c) 2012-2019, www.houdunwang.com. All Rights Reserved.
  * '-------------------------------------------------------------------*/
-namespace hdphp\html;
+namespace houdunwang\html;
 
 class Html {
-	private $app;
-
-	public function __construct( $app ) {
-		$this->app = $app;
-	}
-
 	/**
 	 * 生成静态
 	 *
-	 * @param $controller 控制器
-	 * @param $action     动作
-	 * @param $file       静态文件
+	 * @param string $action
+	 * @param array $args
+	 * @param $file
 	 *
-	 * @return int
+	 * @return bool
 	 */
-	public function make( $controller, $action, $file ) {
+	public function make( $action, array $args, $file ) {
 		ob_start();
-		$this->app->make( $controller )->$action();
+		$_GET   = array_merge( $_GET, $args );
+		$info   = explode( '@', $action );
+		$method = $info[1];
+		( new $info[0] )->$method();
 		$data = ob_get_clean();
-
 		//目录检测
 		if ( ! is_dir( dirname( $file ) ) ) {
-			mkdir( dirname( $file ), 0755, TRUE );
+			mkdir( dirname( $file ), 0755, true );
 		}
 
 		//创建静态文件
-		return file_put_contents( $file, $data ) !== FALSE;
+		return file_put_contents( $file, $data ) !== false;
 	}
 }
