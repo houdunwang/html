@@ -7,19 +7,7 @@ HTML 有很多特点，但是我们也不能盲目使用 HTML，而是应该在�
 
 后盾 HDPHP 框架提供高效简单的生成 HTML 文件的操作。 
 
-[TOC]
 
-##操作
+请 [查看在线手册](http://www.kancloud.cn/houdunwang/hdphp3/215236) 进行学习
 
-####创建对象实例
 
-```
-$obj = new \houdunwang\html\Html();
-```
-
-####生成静态文件
-``` 
-$obj->make('home\News@home',['id'=>1],'index.html');
-```
-
-执行 home\News 类中的 home 方法，并传递$_GET参数id为1, 执行结果生成静态文件index.html。
