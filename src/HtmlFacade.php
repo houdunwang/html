@@ -9,7 +9,8 @@
  * '-------------------------------------------------------------------*/
 namespace houdunwang\facade;
 
-use hdphp\kernel\ServiceFacade;
+
+use houdunwang\framework\ServiceFacade;
 
 class HtmlFacade extends ServiceFacade {
 	public static function getFacadeAccessor() {
