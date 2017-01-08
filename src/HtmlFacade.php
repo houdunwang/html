@@ -9,10 +9,9 @@
  * '-------------------------------------------------------------------*/
 namespace houdunwang\facade;
 
+use houdunwang\framework\build\Facade;
 
-use houdunwang\framework\ServiceFacade;
-
-class HtmlFacade extends ServiceFacade {
+class HtmlFacade extends Facade {
 	public static function getFacadeAccessor() {
 		return 'Html';
 	}

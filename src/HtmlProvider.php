@@ -20,8 +20,8 @@ class HtmlProvider extends Provider {
 	}
 
 	public function register() {
-		$this->app->single( 'Html', function (  ) {
-			return new Html(  );
+		$this->app->single( 'Html', function () {
+			return new Html();
 		} );
 	}
 }
