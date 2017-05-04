@@ -20,12 +20,21 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": ">=5.4.0"
+    "php": ">=5.4.0",
+    "houdunwang/request": "~1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.1"
   },
   "autoload": {
     "files": [],
     "psr-4": {
       "houdunwang\\html\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "tests\\": "tests"
     }
   }
 }
