@@ -1,7 +1,6 @@
 {
   "name": "houdunwang/html",
   "description": "html组件用于生成静态文件",
-  "type": "project",
   "keywords": [
     "houdunwang",
     "hdphp",
